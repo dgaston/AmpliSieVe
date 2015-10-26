@@ -9,6 +9,7 @@ import HTSeq
 from multiprocessing import Pool
 from fuzzywuzzy import fuzz
 from collections import defaultdict
+from nltk.metrics import edit_distance
 
 
 def read_manifest(infile):
@@ -25,14 +26,15 @@ def read_manifest(infile):
 
 
 def match_read_primers(read1, read2, primer_sets):
-    # (read1, read2, primer_sets) = comparison
-    amplicon_assignment = defaultdict(int)
+    amplicon_assignment = defaultdict(lambda: 0.0)
 
     for amplicon in primer_sets:
-        read1_primer_region = read1.get_reverse_complement()[0:len(primer_sets[amplicon]['dlso'])]
+        read1_primer_region = read1.seq[0:len(primer_sets[amplicon]['dlso'])]
         read2_primer_region = read2.seq[0:len(primer_sets[amplicon]['ulso'])]
 
-        ratio1 = fuzz.ratio(read1_primer_region, primer_sets[amplicon]['dlso'])
+        dlso = HTSeq.Sequence(primer_sets[amplicon]['dlso'], "DLSO")
+
+        ratio1 = fuzz.ratio(read1_primer_region, dlso.get_reverse_complement())
         ratio2 = fuzz.ratio(read2_primer_region, primer_sets[amplicon]['ulso'])
 
         if ratio1 > amplicon_assignment['ratio1']:
@@ -64,25 +66,35 @@ if __name__ == "__main__":
     fastq_file2 = HTSeq.FastqReader(read_files[1])
 
     read_comparisons = list()
-    results = list()
-    sys.stdout.write("Constructing comparisons for multiprocessing\n")
+    amplicon_reads = dict()
+    sys.stdout.write("Sorting reads into appropriate amplicons\n")
+    num_processed = 0
     for read1, read2 in itertools.izip(fastq_file1, fastq_file2):
+        num_processed += 1
+        if (num_processed % 10000) == 0:
+            sys.stdout.write("Processed %s reads\n" % num_processed)
         result = match_read_primers(read1, read2, primer_sets)
-        sys.stdout.write("Read1 Amplicon: %s (%s), Read2 Amplicon: %s (%s)\n" % (result['ratio1_amplicon'],
-                                                                                 result['ratio1'],
-                                                                                 result['ratio2_amplicon'],
-                                                                                 result['ratio2']))
-        # read_comparisons.append((read1, read2, primer_sets))
+        if result['ratio1_amplicon'] != result['ratio2_amplicon']:
+            read1_fastq_file = open("%s-mismatched_R1.fastq" % args.output, "w")
+            read2_fastq_file = open("%s-mismatched_R1.fastq" % args.output, "w")
 
-    # sys.stdout.write("Performing comparisons\n")
-    # pool = Pool(processes=int(args.threads))
-    # result = pool.map_async(match_read_primers, itertools.izip(fastq_file1, fastq_file2, itertools.repeat(primer_sets)))
-    # results = result.get()
-    # pool.close()
-    # pool.join()
+            read1.write_to_fastq_file(read1_fastq_file)
+            read2.write_to_fastq_file(read1_fastq_file)
 
-    # for result in results:
-    #     sys.stdout.write("Read1 Amplicon: %s, Read2 Amplicon: %s\n" % (result['ratio1_amplicon'],
-    #                                                                    result['ratio2_amplicon']))
+            read1_fastq_file.close()
+            read2_fastq_file.close()
+            continue
+
+        read1_fastq_name = "%s-%s_R1.fastq" % (args.output, result['ratio1_amplicon'])
+        read2_fastq_name = "%s-%s_R2.fastq" % (args.output, result['ratio2_amplicon'])
+
+        read1_fastq_file = open(read1_fastq_name, "w")
+        read2_fastq_file = open(read2_fastq_name, "w")
+
+        read1.write_to_fastq_file(read1_fastq_file)
+        read2.write_to_fastq_file(read1_fastq_file)
+
+        read1_fastq_file.close()
+        read2_fastq_file.close()
 
     sys.stdout.write("Writing results to file\n")
