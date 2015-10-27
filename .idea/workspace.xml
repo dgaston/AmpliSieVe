@@ -22,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="bin_reads.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bin_reads.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bin_reads.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.77546775">
+              <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
               <folding>
                 <element signature="e#24#34#0" expanded="true" />
               </folding>
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="merge_read_pairs.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="merge_read_pairs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/merge_read_pairs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5987526">
-              <caret line="32" column="91" selection-start-line="32" selection-start-column="91" selection-end-line="32" selection-end-column="91" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,8 +59,8 @@
         <option value="$PROJECT_DIR$/create_manifest.py" />
         <option value="$PROJECT_DIR$/count_primer_read_lengths.py" />
         <option value="$PROJECT_DIR$/create_oligo_fasta.py" />
-        <option value="$PROJECT_DIR$/bin_reads.py" />
         <option value="$PROJECT_DIR$/merge_read_pairs.py" />
+        <option value="$PROJECT_DIR$/bin_reads.py" />
       </list>
     </option>
   </component>
@@ -335,7 +335,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="134" y="160" width="1504" height="1040" extended-state="0" />
+    <frame x="134" y="160" width="1504" height="1040" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -543,21 +543,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin_reads.py">
+    <entry file="file://$PROJECT_DIR$/merge_read_pairs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="43" />
-          <folding>
-            <element signature="e#24#34#0" expanded="true" />
-          </folding>
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/merge_read_pairs.py">
+    <entry file="file://$PROJECT_DIR$/bin_reads.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5987526">
-          <caret line="32" column="91" selection-start-line="32" selection-start-column="91" selection-end-line="32" selection-end-column="91" />
-          <folding />
+        <state vertical-scroll-proportion="0.77546775">
+          <caret line="94" column="39" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

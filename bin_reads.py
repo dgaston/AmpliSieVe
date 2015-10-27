@@ -76,7 +76,7 @@ if __name__ == "__main__":
         result = match_read_primers(read1, read2, primer_sets)
         if result['ratio1_amplicon'] != result['ratio2_amplicon']:
             read1_fastq_file = open("%s-mismatched_R1.fastq" % args.output, "w")
-            read2_fastq_file = open("%s-mismatched_R1.fastq" % args.output, "w")
+            read2_fastq_file = open("%s-mismatched_R2.fastq" % args.output, "w")
 
             read1.write_to_fastq_file(read1_fastq_file)
             read2.write_to_fastq_file(read1_fastq_file)
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         read2_fastq_file = open(read2_fastq_name, "w")
 
         read1.write_to_fastq_file(read1_fastq_file)
-        read2.write_to_fastq_file(read1_fastq_file)
+        read2.write_to_fastq_file(read2_fastq_file)
 
         read1_fastq_file.close()
         read2_fastq_file.close()
