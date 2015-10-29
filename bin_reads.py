@@ -88,8 +88,8 @@ if __name__ == "__main__":
         read1_fastq_name = "%s-%s_R1.fastq" % (args.output, result['ratio1_amplicon'])
         read2_fastq_name = "%s-%s_R2.fastq" % (args.output, result['ratio2_amplicon'])
 
-        read1_fastq_file = open(read1_fastq_name, "w")
-        read2_fastq_file = open(read2_fastq_name, "w")
+        read1_fastq_file = open(read1_fastq_name, "a")
+        read2_fastq_file = open(read2_fastq_name, "a")
 
         read1.write_to_fastq_file(read1_fastq_file)
         read2.write_to_fastq_file(read2_fastq_file)
