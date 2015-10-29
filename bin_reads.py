@@ -4,6 +4,7 @@ import sys
 import csv
 import argparse
 import itertools
+import timeit
 import HTSeq
 
 from multiprocessing import Pool
@@ -59,6 +60,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     read_files = args.infiles.split(',')
 
+    start_time = timeit.default_timer()
+
     sys.stdout.write("Reading primer manifest file\n")
     primer_sets = read_manifest(args.manifest)
 
@@ -98,3 +101,6 @@ if __name__ == "__main__":
         read2_fastq_file.close()
 
     sys.stdout.write("Writing results to file\n")
+    elapsed = timeit.default_timer() - start_time
+    sys.stdout.write("Total elapsed time for pipeline: %s sec\n" % elapsed)
+    sys.stdout.write("Completed pipeline\n")
